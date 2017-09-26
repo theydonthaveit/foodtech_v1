@@ -1,27 +1,15 @@
 {
-  "compilerOptions": {
-    "declaration": false,
-    "emitDecoratorMetadata": false,
-    "experimentalDecorators": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noFallthroughCasesInSwitch": false,
-    "noImplicitAny": true,
-    "noImplicitReturns": false,
-    "removeComments": false,
-    "sourceMap": true,
-    "strictNullChecks": true,
-    "target": "es6",
-    "plugins": [
-      {
-        "name": "tslint-language-service"
-      }
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "dist",
+        "sourceMap": true,
+        "allowJs": true
+    },
+    "include": [
+        "src/**/*.ts"
     ],
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noImplicitThis": true,
-		"skipDefaultLibCheck": true,
-		"skipLibCheck": true
-  },
-  "compileOnSave": true
+    "exclude": [
+        "node_modules"
+    ]
 }

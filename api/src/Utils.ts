@@ -1,3 +1,8 @@
-const addUserToDatabase = {}
+import DBH from './DBH'
 
-export default { addUserToDatabase }
+export default {
+    addUserToDatabase(payload: string) {
+        const PAYLOAD = JSON.parse(payload)
+        DBH.addUser(PAYLOAD)
+    }
+}
