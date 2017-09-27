@@ -2,13 +2,19 @@ import * as SP from 'stripe'
 
 const STRIPE = SP('sk_test_edFqhGjHMIQrhYvbYm7KOk0U')
 
+
+
 export default {
-    createAccount( email: string ) {
-        STRIPE.customers.create({
-            email: email
-        }, function(err, customer) {
-            return customer
-        })
+    createAccount: async function createAccount( email: string ) {
+        try {
+            let stripe_id: number = await STRIPE.customers.create({
+                email: email
+            }).then((customerAcc) => {
+                return customerAcc.id
+            })
+        } catch (err) {
+            return err
+        }
     }
 
 // public addFinancialDetials( financeDetails: any ): void  {

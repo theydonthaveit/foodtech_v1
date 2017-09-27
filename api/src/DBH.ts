@@ -34,7 +34,7 @@ const USER = SEQUELIZE.define(
             type: Sequelize.STRING
         },
         stripe_id: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         }
     }
 );
@@ -52,7 +52,7 @@ export default {
 
         let stripeId = Stripe.createAccount(payload.email)
         console.log(stripeId)
-
+        
         USER.sync({force: true}).then(() => {
             // Table created
             return USER.create({
