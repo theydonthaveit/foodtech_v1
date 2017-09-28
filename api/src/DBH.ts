@@ -7,7 +7,7 @@ import Stripe from './Stripe'
 const SEQUELIZE = new Sequelize(
     'foodtech',
     'root',
-    'a@280989aW', {
+    'blank', {
         host: 'localhost',
         dialect: 'mysql',
 
@@ -40,7 +40,10 @@ const USER = SEQUELIZE.define(
 );
 
 export default {
-    addUser(payload: any) {
+    addUser: async function(payload: any) {
+        // TODO
+        // bcrypt in own file
+        let bcryptPassword
         let encryptPassword: string
         let saltRounds: number = 10
 
@@ -50,9 +53,8 @@ export default {
             })
         })
 
-        let stripeId = Stripe.createAccount(payload.email)
-        console.log(stripeId)
-        
+        let stripe = await Stripe.createAccount(payload.email)
+
         USER.sync({force: true}).then(() => {
             // Table created
             return USER.create({
@@ -60,7 +62,7 @@ export default {
                 lastname: payload.lastname,
                 email: payload.email,
                 password: encryptPassword,
-                stripe_id: stripeId
+                stripe_id: stripe.id
             });
         });
     },

@@ -2,17 +2,18 @@ import * as SP from 'stripe'
 
 const STRIPE = SP('sk_test_edFqhGjHMIQrhYvbYm7KOk0U')
 
-
-
 export default {
-    createAccount: async function createAccount( email: string ) {
+    createAccount(email: string): Promise<any> {
+        let customerAcc
+        
         try {
-            let stripe_id: number = await STRIPE.customers.create({
+            customerAcc = STRIPE.customers.create({
                 email: email
-            }).then((customerAcc) => {
-                return customerAcc.id
             })
-        } catch (err) {
+
+            return customerAcc
+        }
+        catch(err) {
             return err
         }
     }
