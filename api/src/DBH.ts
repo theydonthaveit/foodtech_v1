@@ -1,6 +1,6 @@
 import * as console from 'console';
 import * as Sequelize from 'sequelize';
-import * as Bcrypt from 'bcrypt';
+import Utils from './utils'
 
 import Stripe from './Stripe'
 
@@ -41,18 +41,7 @@ const USER = SEQUELIZE.define(
 
 export default {
     addUser: async function(payload: any) {
-        // TODO
-        // bcrypt in own file
-        let bcryptPassword
-        let encryptPassword: string
-        let saltRounds: number = 10
-
-        Bcrypt.genSalt(saltRounds, function(err, salt) {
-            Bcrypt.hash(payload.password, salt, function(err, hash) {
-                encryptPassword = hash
-            })
-        })
-
+        let bcryptPassword = await Utils.genPassword(payload.password)
         let stripe = await Stripe.createAccount(payload.email)
 
         USER.sync({force: true}).then(() => {
@@ -61,7 +50,7 @@ export default {
                 firstname: payload.firstname,
                 lastname: payload.lastname,
                 email: payload.email,
-                password: encryptPassword,
+                password: bcryptPassword,
                 stripe_id: stripe.id
             });
         });
