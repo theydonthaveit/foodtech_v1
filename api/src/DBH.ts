@@ -24,6 +24,7 @@ export default {
     chargeAccount: async function(chargeDetails: any) {
         // TODO
         // Database linked based on orders
+        // update order table with paid status / disputed / etc
         await Stripe.chargeAccount(chargeDetails)
     },
     invoiceAccount: async function(customer: any) {
@@ -31,6 +32,16 @@ export default {
         // Database linked based on orders
         await Stripe.invoiceAccount(customer)
     },
-    orders(orderDetails: any) {
+    order(orderDetails: any) {
+        Models.ORDERS.sync({force: true}).then(() => {
+            // Table created
+            return Models.ORDERS.create({
+                user_id: orderDetails.user_id,
+                resturant_id: orderDetails.resturant_id,
+                items: orderDetails.items,
+                value: orderDetails.value,
+                paid: orderDetails.paid
+            })
+        })
     }
 }

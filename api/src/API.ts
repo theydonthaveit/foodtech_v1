@@ -43,6 +43,14 @@ SERVER.route({
         reply(dbhResp)
     }
 })
+SERVER.route({
+    method: 'POST',
+    path: '/order',
+    handler: function (request: any, reply: any) {
+        let dbhResp = DBH.order(request.payload)
+        reply(dbhResp)
+    }
+})
 
 SERVER.start((err: string) => {
     if (err) {

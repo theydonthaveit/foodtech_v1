@@ -1,0 +1,10 @@
+{
+    "user_id": 1,
+    "resturant_id": 1,
+    "items": {
+        "chocolate-pudding": 25.00,
+        "steak": 75.00
+    },
+    "value": 100.00,
+    "paid": false
+}

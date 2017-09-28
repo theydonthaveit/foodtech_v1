@@ -38,19 +38,19 @@ const USER = SEQUELIZE.define(
     }
 )
 
-const RESTURANT = SEQUELIZE.define(
-    'Resturants', {
-        name: {
-            type: Sequelize.STRING
-        },
-        location: {
-            type: Sequelize.STRING
-        },
-        seating: {
-            type: Sequelize.INTEGER
-        }
-    }
-)
+// const RESTURANT = SEQUELIZE.define(
+//     'Resturants', {
+//         name: {
+//             type: Sequelize.STRING
+//         },
+//         location: {
+//             type: Sequelize.STRING
+//         },
+//         seating: {
+//             type: Sequelize.INTEGER
+//         }
+//     }
+// )
 
 const ORDERS = SEQUELIZE.define(
     'Orders', {
@@ -62,7 +62,7 @@ const ORDERS = SEQUELIZE.define(
         },
         items: {
             type: Sequelize.JSON
-        }
+        },
         value: {
             type: Sequelize.INTEGER
         },
