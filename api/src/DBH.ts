@@ -1,7 +1,6 @@
-import * as console from 'console';
 import * as Sequelize from 'sequelize';
-import Utils from './utils'
 
+import Utils from './utils'
 import Stripe from './Stripe'
 
 const SEQUELIZE = new Sequelize(
@@ -55,4 +54,7 @@ export default {
             });
         });
     },
+    addCardDetails: async function(payload: any) {
+        await Stripe.addCardDetails(payload)
+    }
 }

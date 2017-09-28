@@ -16,6 +16,26 @@ export default {
         catch(err) {
             return err
         }
+    },
+    addCardDetails(payload: any): Promise<any> {
+        STRIPE.customers.createSource(
+            payload.stripe_id,
+            {
+                object: "card",
+                exp_month: payload.exp_month,
+                exp_year: payload.exp_year,
+                number: payload.card_num,
+                currency: payload.card_currency,
+                cvc: payload.cvc
+            }, function(err, card) {
+                if(err) {
+                    console.log('bad')
+                }
+                else {
+                    console.log(card)
+                }
+            }
+        );
     }
 
 // public addFinancialDetials( financeDetails: any ): void  {
