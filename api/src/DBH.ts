@@ -1,51 +1,15 @@
-import * as Sequelize from 'sequelize';
-
 import Utils from './utils'
 import Stripe from './Stripe'
-
-const SEQUELIZE = new Sequelize(
-    'foodtech',
-    'root',
-    'blank', {
-        host: 'localhost',
-        dialect: 'mysql',
-
-        pool: {
-            max: 5,
-            min: 0,
-            idle: 10000
-        },
-    }
-);
-
-const USER = SEQUELIZE.define(
-    'Users', {
-        firstname: {
-            type: Sequelize.STRING
-        },
-        lastname: {
-            type: Sequelize.STRING
-        },
-        email: {
-            type: Sequelize.STRING
-        },
-        password: {
-            type: Sequelize.STRING
-        },
-        stripe_id: {
-            type: Sequelize.STRING
-        }
-    }
-);
+import Models from './models'
 
 export default {
     addUser: async function(payload: any) {
         let bcryptPassword = await Utils.genPassword(payload.password)
         let stripe = await Stripe.createAccount(payload.email)
 
-        USER.sync({force: true}).then(() => {
+        Models.USER.sync({force: true}).then(() => {
             // Table created
-            return USER.create({
+            return Models.USER.create({
                 firstname: payload.firstname,
                 lastname: payload.lastname,
                 email: payload.email,
@@ -54,7 +18,19 @@ export default {
             });
         });
     },
-    addCardDetails: async function(payload: any) {
-        await Stripe.addCardDetails(payload)
+    addCardDetails: async function(cardDetails: any) {
+        await Stripe.addCardDetails(cardDetails)
+    },
+    chargeAccount: async function(chargeDetails: any) {
+        // TODO
+        // Database linked based on orders
+        await Stripe.chargeAccount(chargeDetails)
+    },
+    invoiceAccount: async function(customer: any) {
+        // TODO
+        // Database linked based on orders
+        await Stripe.invoiceAccount(customer)
+    },
+    orders(orderDetails: any) {
     }
 }

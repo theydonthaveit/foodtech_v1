@@ -19,6 +19,30 @@ SERVER.route({
         reply(dbhResp)
     }
 })
+SERVER.route({
+    method: 'POST',
+    path: '/add-financial-details',
+    handler: function (request: any, reply: any) {
+        let dbhResp = DBH.addCardDetails(request.payload)
+        reply(dbhResp)
+    }
+})
+SERVER.route({
+    method: 'POST',
+    path: '/charge-account',
+    handler: function (request: any, reply: any) {
+        let dbhResp = DBH.chargeAccount(request.payload)
+        reply(dbhResp)
+    }
+})
+SERVER.route({
+    method: 'POST',
+    path: '/invoice-account',
+    handler: function (request: any, reply: any) {
+        let dbhResp = DBH.chargeAccount(request.payload)
+        reply(dbhResp)
+    }
+})
 
 SERVER.start((err: string) => {
     if (err) {
