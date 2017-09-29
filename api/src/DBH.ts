@@ -43,5 +43,22 @@ export default {
                 paid: orderDetails.paid
             })
         })
+    },
+    addMenuItems(menuItems: any) {
+        // TODO
+        // MAKE it handle multiple entries in one payload
+        // Dynamic table creation
+        Models.MENU_ITEMS.sync({force: true}).then(() => {
+            return Models.MENU_ITEMS.create({
+                resturant_id: menuItems.resturant_id,
+                itemName: menuItems.itemName,
+                ingredients: menuItems.ingredients,
+                allergies: menuItems.allergies,
+                customizable: menuItems.customizable,
+                substitutes: menuItems.substitutes,
+                ingredientChanges: menuItems.ingredientChanges,
+                itemStatus: menuItems.itemStatus
+            })
+        })
     }
 }

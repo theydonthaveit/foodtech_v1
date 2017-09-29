@@ -1,3 +1,5 @@
+import { Packet } from '_debugger';
+import { unescape } from 'querystring';
 import * as Sequelize from 'sequelize';
 
 const SEQUELIZE = new Sequelize(
@@ -16,7 +18,7 @@ const SEQUELIZE = new Sequelize(
 )
 
 const USER = SEQUELIZE.define(
-    'Users', {
+    'User', {
         firstname: {
             type: Sequelize.STRING
         },
@@ -24,7 +26,8 @@ const USER = SEQUELIZE.define(
             type: Sequelize.STRING
         },
         email: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            unique: true
         },
         password: {
             type: Sequelize.STRING
@@ -52,6 +55,55 @@ const USER = SEQUELIZE.define(
 //     }
 // )
 
+const MENU_ITEMS = SEQUELIZE.define(
+    'MenuItems', {
+        resturant_id: {
+            type: Sequelize.INTEGER,
+            unique: true
+        },
+        itemName: {
+            type: Sequelize.STRING
+        },
+        ingredients: {
+            type: Sequelize.JSON
+        },
+        allergies: {
+            type: Sequelize.JSON
+        },
+        customizable: {
+            type: Sequelize.BOOLEAN
+        },
+        substitutes: {
+            // TODO
+            // Could be an associations table
+            type: Sequelize.JSON
+        },
+        ingredientChanges: {
+            type: Sequelize.JSON
+        },
+        itemStatus: {
+            type: Sequelize.STRING
+        }
+    }
+)
+
+// const MENUS = SEQUELIZE.define(
+//     'Menus', {
+//         name: {
+//             type: Sequelize.STRING
+//         },
+//         live: {
+//             type: Sequelize.BOOLEAN
+//         },
+//         resturant_id: {
+//             type: Sequelize.INTEGER
+//         },
+//         menu: {
+//             type: Sequelize.JSON
+//         }
+//     }
+// )
+
 const ORDERS = SEQUELIZE.define(
     'Orders', {
         user_id: {
@@ -72,4 +124,4 @@ const ORDERS = SEQUELIZE.define(
     }
 )
 
-export default { USER, ORDERS }
+export default { USER, ORDERS, MENU_ITEMS }

@@ -1,0 +1,20 @@
+{
+    "resturant_id": 1,
+    "itemName": "Banana Pancakes",
+    "ingredients": [
+        "wheat",
+        "butter milk",
+        "banana"
+    ],
+    "allergies": [
+        "Gluten"
+    ],
+    "customizable": true,
+    "substitutes": [
+        "Gluten Free Wheat"
+    ],
+    "ingredientChanges": {
+        "wheat": "Gluten Free Wheat"
+    },
+    "itemStatus": "active"
+}
